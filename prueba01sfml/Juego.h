@@ -24,6 +24,8 @@ public:
 	void update();
 	bool juegoActivo();
 	void crearBala(float x, float y, int tipoDisparo);
+	void crearPlayer();
+	void crearEnemigo(float x, float y, int tipoEnemigo);
 
 	static Juego* getInstancia();
 };

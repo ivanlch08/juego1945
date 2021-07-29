@@ -17,17 +17,10 @@ int main() {
     sf::RenderWindow win(sf::VideoMode(800, 600), "1945");
     juego->window = &win;
 
-    
-    sf::Texture playerTexture;
-    playerTexture.loadFromFile("texturas/ship.png");
-
-    vector<Player*> listaEntidades;
-    
-    Player player(&playerTexture, sf::Vector2u(5,2), 0.05f, 400, 500, 500);
-    
-
-    listaEntidades.push_back(&player);
-    
+    juego->crearPlayer();
+    juego->crearEnemigo(300, 300, 1);
+    juego->crearEnemigo(400, 400, 2);
+    juego->crearEnemigo(500, 500, 3);
     
     float deltaTime = 0.0f;
     float tiempoTotal = 0.0f;
@@ -52,15 +45,6 @@ int main() {
 
         juego->window->clear( sf::Color::Black );
 
-        for (int i = 0; i < listaEntidades.size(); i++) {
-            Player* entidad = listaEntidades[i];
-            entidad->Update(deltaTime);
-        }//for
-        for (int i = 0; i < listaEntidades.size(); i++) {
-            Player* entidad = listaEntidades[i];
-            entidad->Draw((*(juego->window)));
-        }//for
-
         for (int i = 0; i < juego->listaEntidadesBase.size(); i++) {
             Entidad* e = juego->listaEntidadesBase[i];
             e->Update(deltaTime);
@@ -68,6 +52,7 @@ int main() {
 
         for (int i = 0; i < juego->listaEntidadesBase.size(); i++) {
             Entidad* e = juego->listaEntidadesBase[i];
+            e->UpdateAnim(deltaTime);
             e->Draw((*(juego->window)));
         }//
         
