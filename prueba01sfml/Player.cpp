@@ -64,19 +64,29 @@ void Player::Update(float deltaTime){
 	}
 
 	if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ) {
-		movement.x -= speedTemp * deltaTime;
-		idAnimacion = 1;
+		//verificar que no salga del limite
+		if ( body.getPosition().x > 0 ) {
+			movement.x -= speedTemp * deltaTime;
+			idAnimacion = 1;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-		movement.x += speedTemp * deltaTime;
-		idAnimacion = 2;
+		//verificar que no salga del limite
+		if (body.getPosition().x < 800) {
+			movement.x += speedTemp * deltaTime;
+			idAnimacion = 2;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-		movement.y -= speedTemp * deltaTime;
+		if (body.getPosition().y > 0) {
+			movement.y -= speedTemp * deltaTime;
+		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-		movement.y += speedTemp * deltaTime;
+		if (body.getPosition().y < 800) {
+			movement.y += speedTemp * deltaTime;
+		}
 	}
 	body.move(movement);
-	
+	//cout << "posx: " << body.getPosition().x << ", posy: " << body.getPosition().y << endl;
 }//update

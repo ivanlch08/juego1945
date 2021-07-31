@@ -11,16 +11,18 @@ using namespace std;
 
 
 int main() {
+    srand((unsigned int)time(NULL));
     Juego* juego = Juego::getInstancia();
     juego->iniciar();
 
-    sf::RenderWindow win(sf::VideoMode(800, 600), "1945");
+    sf::RenderWindow win(sf::VideoMode(800, 800), "1945");
     juego->window = &win;
 
     juego->crearPlayer();
-    juego->crearEnemigo(300, 300, 1);
+    juego->crearEnemigo(400, 400, 1);
     juego->crearEnemigo(400, 400, 2);
-    juego->crearEnemigo(500, 500, 3);
+    juego->crearEnemigo(400, 400, 3);
+    
     
     float deltaTime = 0.0f;
     float tiempoTotal = 0.0f;
