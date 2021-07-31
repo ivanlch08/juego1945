@@ -50,7 +50,8 @@ void Player::Update(float deltaTime){
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::C)) {
 		float diferencia = tiempoTotal - tiempoUltimoDisparo;
 		if ( diferencia > lapsoBalas ) {
-			Juego::getInstancia()->crearBala( body.getPosition().x, body.getPosition().y, tipoDisparo);
+			sf::Vector2f* dir = new sf::Vector2f(0,-1.f);
+			Juego::getInstancia()->crearBala( body.getPosition().x, body.getPosition().y, 1, dir);
 			tiempoUltimoDisparo = tiempoTotal;
 		}
 	}

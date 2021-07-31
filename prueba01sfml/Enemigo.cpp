@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include "VectorUtil.h"
+#include "Juego.h"
 
 Enemigo::Enemigo(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float x, float y, int _tipoEnemigo):
 	Entidad(texture, imageCount, switchTime, speed, x, y) {
@@ -58,7 +59,7 @@ void Enemigo::Update(float deltaTime){
 		inicioDisparar();
 		break;
 	case ESTADO_DISPARO:
-		disparar();
+		disparar(deltaTime);
 		break;
 	default:
 		break;
@@ -89,7 +90,7 @@ void Enemigo::moverse(float deltaTime){
 	float magnitud = VectorUtil::magnitud(direccion);
 
 	if (  magnitud < 10.f ) {
-		ESTADO_ACTUAL = ESTADO_INICIO_MOVERSE;
+		ESTADO_ACTUAL = ESTADO_INICIO_DISPARO;
 	}
 	
 	direccion = VectorUtil::normalize(direccion);
@@ -99,8 +100,27 @@ void Enemigo::moverse(float deltaTime){
 }
 
 void Enemigo::inicioDisparar(){
+	//reiniciar contadores
+	contadorDisparos = 0;
+	contadorLapsoDisparo = 0;
+	ESTADO_ACTUAL = ESTADO_DISPARO;
 }
 
-void Enemigo::disparar(){
-}
+void Enemigo::disparar(float deltaTime){
+	float tiempoDisparo = 0.3f;
+	contadorLapsoDisparo += deltaTime;
+	if (contadorLapsoDisparo >= tiempoDisparo) {
+		contadorLapsoDisparo -= tiempoDisparo;
+		
+		//disparar 3 veces
+		Juego* juego = Juego::getInstancia();
+		sf::Vector2f* dir = new sf::Vector2f(0, 1);
+		juego->crearBala(body.getPosition().x, body.getPosition().y, 0, dir);
+		contadorDisparos++;
 
+		if (contadorDisparos >= 3) {
+			ESTADO_ACTUAL = ESTADO_INICIO_MOVERSE;
+		}
+
+	}
+}

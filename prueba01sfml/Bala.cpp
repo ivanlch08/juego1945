@@ -1,11 +1,11 @@
 #include "Bala.h"
 #include <iostream>
 
-Bala::Bala(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float x, float y, int _tipoDisparo) :
+Bala::Bala(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float x, float y, int _tipoDisparo, sf::Vector2f* dir) :
 	Entidad(texture, imageCount, switchTime, speed, x, y) {
 	
 	idAnimacion = _tipoDisparo;
-
+	direccion = dir;
 	body.setSize(sf::Vector2f(50.f, 50.f));
 	body.setOrigin(sf::Vector2f(25.f, 25.f));
 
@@ -30,12 +30,13 @@ Bala::Bala(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, floa
 }
 
 Bala::~Bala(){
+	delete direccion;
 }
 
 void Bala::Update(float deltaTime) {
-	sf::Vector2f movement(0.0f, 0.0f);
-	movement.y -= speed * deltaTime;
-	body.move(movement);
+	sf::Vector2f avance(direccion->x, direccion->y);
+	avance *= speed * deltaTime;
+	body.move(avance);
 
 	
 }//

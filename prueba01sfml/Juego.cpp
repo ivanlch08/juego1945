@@ -23,10 +23,10 @@ bool Juego::juegoActivo(){
     return esActivo;
 }
 
-void Juego::crearBala(float x, float y, int tipoDisparo){ 
+void Juego::crearBala(float x, float y, int tipoDisparo, sf::Vector2f* direccion){
     sf::Texture* text = new sf::Texture();
     text->loadFromFile("texturas/balas.png");
-    Bala* b = new Bala(text, sf::Vector2u(4, 20), 0.05f, 500, x, y, tipoDisparo);
+    Bala* b = new Bala(text, sf::Vector2u(4, 20), 0.05f, 500, x, y, tipoDisparo, direccion);
     listaEntidadesBase.push_back( (Entidad*)b );
 }
 void Juego::crearPlayer(){

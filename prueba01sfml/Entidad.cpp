@@ -1,9 +1,10 @@
 #include "Entidad.h"
 #include <iostream>
+#include "Juego.h"
 
 Entidad::Entidad(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float x, float y):
 	animation(texture, imageCount, switchTime) {
-	
+
 	static int IDS = 0;
 	this->id = IDS++;
 	

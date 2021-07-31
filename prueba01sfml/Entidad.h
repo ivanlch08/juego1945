@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
 
+
 #pragma once
 class Entidad{
 public:

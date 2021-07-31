@@ -8,6 +8,9 @@ private:
 	float velocidad = 400;
 	int ESTADO_ACTUAL = 0;
 	sf::Vector2f* posicionAleatoria = new sf::Vector2f(0.f, 0.f);;
+
+	int contadorDisparos = 0;
+	float contadorLapsoDisparo = 0;
 public:
 	int const static ESTADO_INICIO_DISPARO = 1;
 	int const static ESTADO_DISPARO = 2;
@@ -21,6 +24,6 @@ public:
 	void inicioMoverse();
 	void moverse(float deltaTime);
 	void inicioDisparar();
-	void disparar();
+	void disparar(float deltaTime);
 	
 };
