@@ -8,7 +8,36 @@
 
 using namespace std;
 
+void verificarEliminar() {
+    Juego* juego = Juego::getInstancia();
 
+    for (int k = 0; k < juego->listaEntidadesEliminar.size(); k++) {
+        Entidad* elim = juego->listaEntidadesEliminar[k];
+        int indiceElim = -1;
+        for (int i = 0; i < juego->listaEntidadesBase.size(); i++) {
+            Entidad* e = juego->listaEntidadesBase[i];
+            if (e->id == elim->id) {
+                //quitar de vector de eliminados
+                juego->listaEntidadesEliminar.erase(
+                    juego->listaEntidadesEliminar.begin() + k
+                );
+                k = -1;
+                //registrar indice
+                indiceElim = i;
+                break;
+            }
+        }//
+        if (indiceElim != -1) {
+            Entidad* e = juego->listaEntidadesBase[indiceElim];
+            juego->listaEntidadesBase.erase(
+                juego->listaEntidadesBase.begin() + indiceElim
+            );
+            delete e;
+        }
+    }//
+
+    
+}
 
 int main() {
     srand((unsigned int)time(NULL));
@@ -58,7 +87,9 @@ int main() {
             e->Draw((*(juego->window)));
         }//
         
-        
+        //iterar entidades a eliminar
+        verificarEliminar();
+
         juego->window->display();
     }//while
 

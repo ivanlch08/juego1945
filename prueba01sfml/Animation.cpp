@@ -12,8 +12,8 @@ Animation::Animation(sf::Texture* texture, sf::Vector2u imageCount, float switch
 	
 }
 
-Animation::~Animation()
-{
+Animation::~Animation(){
+	delete animActual;
 }
 
 void Animation::update(int row, float deltaTime, int idAnim){

@@ -10,6 +10,8 @@ class Juego{
 public:
 	sf::RenderWindow* window;
 	vector<Entidad*> listaEntidadesBase;
+	vector<Entidad*> listaEntidadesEnemigos;
+	vector<Entidad*> listaEntidadesEliminar;
 	Player* player;
 private:
 	static Juego* instancia;
@@ -26,6 +28,7 @@ public:
 	void crearBala(float x, float y, int tipoDisparo, sf::Vector2f* direccion);
 	void crearPlayer();
 	void crearEnemigo(float x, float y, int tipoEnemigo);
+	void registrarEliminar(Entidad* entidad);
 
 	static Juego* getInstancia();
 };

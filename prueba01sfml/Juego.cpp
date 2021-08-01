@@ -54,6 +54,11 @@ void Juego::crearEnemigo(float x, float y, int tipoEnemigo){
     
     Enemigo* enemigo = new Enemigo(text, sf::Vector2u(2, 1), 0.05f, 400, x, x, tipoEnemigo);
     listaEntidadesBase.push_back((Entidad*)enemigo);
+    listaEntidadesEnemigos.push_back((Entidad*)enemigo);
+}
+
+void Juego::registrarEliminar(Entidad* entidad){
+    listaEntidadesEliminar.push_back(entidad);
 }
 
 

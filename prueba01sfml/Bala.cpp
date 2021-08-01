@@ -42,23 +42,46 @@ Bala::~Bala(){
 }
 
 void Bala::Update(float deltaTime) {
+	contadorTiempoVida += deltaTime;
+
 	sf::Vector2f avance(direccion->x, direccion->y);
 	avance *= speed * deltaTime;
 	body.move(avance);	
 	//validar si hay colision
-	Juego* juego = Juego::getInstancia();
+	
 
 	if (tipoDisparo == 1) {
+		Juego* juego = Juego::getInstancia();
+		sf::FloatRect boundingBox = body.getGlobalBounds();
 		//es bala disparada por player, mirar enemigos
+		for (int k = 0; k < juego->listaEntidadesEnemigos.size(); k++) {
+			Entidad* enemigo = juego->listaEntidadesEnemigos[k];
+			sf::FloatRect boundingBoxEnemigo = enemigo->body.getGlobalBounds();
+			if (boundingBox.intersects(boundingBoxEnemigo)) {
+				juego->registrarEliminar(enemigo);
+				juego->registrarEliminar(this);
+				juego->listaEntidadesEnemigos.erase(
+					juego->listaEntidadesEnemigos.begin() + k
+				);
 
+				break;
+			}
+		}
 	}
 	else {
 		//es bala disparada por enemigo, mirar colision con player
+		Juego* juego = Juego::getInstancia();
 		sf::FloatRect boundingBox = body.getGlobalBounds();
 		sf::FloatRect boundingBoxPlayer = juego->player->body.getGlobalBounds();
 		if (boundingBox.intersects(boundingBoxPlayer)) {
 			//cout << "colision!" << endl;
+			
 		}
 	}
 	
+	//si tiempo de vida supera 2 segundos, eliminar entity
+	if ( contadorTiempoVida >= 2.f ) {
+		Juego* juego = Juego::getInstancia();
+		juego->registrarEliminar(this);
+	}
 }//
