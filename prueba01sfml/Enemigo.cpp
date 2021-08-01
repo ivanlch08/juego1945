@@ -160,9 +160,7 @@ void Enemigo::dispararEstilo02(float deltaTime){
 		//disparar 3 veces
 		Juego* juego = Juego::getInstancia();
 		sf::Vector2f d = juego->player->body.getPosition() - body.getPosition();
-		//cout << "dx: " << d.x << ", dy: " << d.y << endl;
 		sf::Vector2f norm = VectorUtil::normalize(d);
-		//cout << "nx: " << norm.x << ", ny: " << norm.y << endl;
 		sf::Vector2f* dir = new sf::Vector2f(norm.x, norm.y);
 		
 		juego->crearBala(body.getPosition().x, body.getPosition().y, 2, dir);
@@ -176,4 +174,29 @@ void Enemigo::dispararEstilo02(float deltaTime){
 }
 
 void Enemigo::dispararEstilo03(float deltaTime){
+	//hacer una rotacion de 360 disparando cada cierto intervalo
+	int cantidadDisparos = 15;
+	float tiempoDisparo = 0.025f;
+	contadorLapsoDisparo += deltaTime;
+	if (contadorLapsoDisparo >= tiempoDisparo) {
+		contadorLapsoDisparo -= tiempoDisparo;
+
+		//calcular rotacion
+		float avance = (float)((float)contadorDisparos / (float)cantidadDisparos);
+		float grados = 360.f * avance;
+
+		//disparar 3 veces
+		Juego* juego = Juego::getInstancia();
+		sf::Vector2f d(0, 1);
+		sf::Vector2f norm = VectorUtil::rotar(d, grados);
+		sf::Vector2f* dir = new sf::Vector2f(norm.x, norm.y);
+
+		juego->crearBala(body.getPosition().x, body.getPosition().y, 6, dir);
+		contadorDisparos++;
+
+		if (contadorDisparos >= cantidadDisparos) {
+			ESTADO_ACTUAL = ESTADO_INICIO_MOVERSE;
+		}
+
+	}
 }

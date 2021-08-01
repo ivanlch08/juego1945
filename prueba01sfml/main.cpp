@@ -21,7 +21,7 @@ int main() {
     juego->crearPlayer();
     juego->crearEnemigo(400, 400, 1);
     juego->crearEnemigo(400, 400, 2);
-    //juego->crearEnemigo(400, 400, 3);
+    juego->crearEnemigo(400, 400, 3);
     
     
     float deltaTime = 0.0f;

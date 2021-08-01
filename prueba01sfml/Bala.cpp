@@ -1,10 +1,11 @@
 #include "Bala.h"
 #include <iostream>
+#include	 "Juego.h"
 
 Bala::Bala(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, float speed, float x, float y, int _tipoDisparo, sf::Vector2f* dir) :
 	Entidad(texture, imageCount, switchTime, speed, x, y) {
 	
-	//idAnimacion = _tipoDisparo;
+	tipoDisparo = _tipoDisparo;
 	idAnimacion = 0;
 	direccion = dir;
 
@@ -42,7 +43,22 @@ Bala::~Bala(){
 
 void Bala::Update(float deltaTime) {
 	sf::Vector2f avance(direccion->x, direccion->y);
-	//cout << "x: " << direccion->x << ", y: " << direccion->y << endl;
 	avance *= speed * deltaTime;
 	body.move(avance);	
+	//validar si hay colision
+	Juego* juego = Juego::getInstancia();
+
+	if (tipoDisparo == 1) {
+		//es bala disparada por player, mirar enemigos
+
+	}
+	else {
+		//es bala disparada por enemigo, mirar colision con player
+		sf::FloatRect boundingBox = body.getGlobalBounds();
+		sf::FloatRect boundingBoxPlayer = juego->player->body.getGlobalBounds();
+		if (boundingBox.intersects(boundingBoxPlayer)) {
+			//cout << "colision!" << endl;
+		}
+	}
+	
 }//
