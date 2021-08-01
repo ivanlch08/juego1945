@@ -25,5 +25,7 @@ public:
 	void moverse(float deltaTime);
 	void inicioDisparar();
 	void disparar(float deltaTime);
-	
+	void dispararEstilo01(float deltaTime);
+	void dispararEstilo02(float deltaTime);
+	void dispararEstilo03(float deltaTime);
 };

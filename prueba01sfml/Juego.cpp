@@ -26,13 +26,13 @@ bool Juego::juegoActivo(){
 void Juego::crearBala(float x, float y, int tipoDisparo, sf::Vector2f* direccion){
     sf::Texture* text = new sf::Texture();
     text->loadFromFile("texturas/balas.png");
-    Bala* b = new Bala(text, sf::Vector2u(4, 20), 0.05f, 500, x, y, tipoDisparo, direccion);
+    Bala* b = new Bala(text, sf::Vector2u(4, 20), 0.05f, 400, x, y, tipoDisparo, direccion);
     listaEntidadesBase.push_back( (Entidad*)b );
 }
 void Juego::crearPlayer(){
     sf::Texture* text = new sf::Texture();
     text->loadFromFile("texturas/ship.png");
-    Player* player = new Player(text, sf::Vector2u(5, 2), 0.05f, 400, 600, 600);
+    player = new Player(text, sf::Vector2u(5, 2), 0.05f, 400, 600, 600);
     listaEntidadesBase.push_back((Entidad*)player);
 }
 

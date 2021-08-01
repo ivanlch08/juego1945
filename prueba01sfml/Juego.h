@@ -10,11 +10,11 @@ class Juego{
 public:
 	sf::RenderWindow* window;
 	vector<Entidad*> listaEntidadesBase;
+	Player* player;
 private:
 	static Juego* instancia;
 	bool esActivo = true;
 	float deltaTime = 0.0f;
-	//sf::Clock clock;
 	vector<Player*> listaEntidades;
 	
 private:

@@ -56,14 +56,6 @@ void Player::Update(float deltaTime){
 		}
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::V) && botonVpresionado == false) {
-		tipoDisparo = tipoDisparo == 0 ? 1 : 0;
-		botonVpresionado = true;
-	}
-	else {
-		botonVpresionado = false;
-	}
-
 	if ( sf::Keyboard::isKeyPressed(sf::Keyboard::Left) ) {
 		//verificar que no salga del limite
 		if ( body.getPosition().x > 0 ) {

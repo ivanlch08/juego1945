@@ -67,12 +67,18 @@ void Enemigo::Update(float deltaTime){
 }
 void Enemigo::inicioMoverse(){
 	//obtener una posicion destino aleatoria
+	//tipoEnemigo = 1: eje x siempre es el mismo del player
 	delete posicionAleatoria;
 	
 	float a = 1.0;
 
 	float maxTam = 800;
-	float x = (float(rand()) / float((RAND_MAX)) * a) * maxTam;
+	float x = 0;
+	if ( tipoEnemigo == 1 ) {
+		x = Juego::getInstancia()->player->body.getPosition().x;
+	}else {
+		x = (float(rand()) / float((RAND_MAX)) * a) * maxTam;
+	}
 	maxTam = 400;
 	float y = (float(rand()) / float((RAND_MAX)) * a) * maxTam;
 	
@@ -107,13 +113,33 @@ void Enemigo::inicioDisparar(){
 }
 
 void Enemigo::disparar(float deltaTime){
-	float tiempoDisparo = 0.3f;
+	switch (tipoEnemigo){
+	case 1:
+		dispararEstilo01(deltaTime);
+		break;
+	case 2:
+		dispararEstilo02(deltaTime);
+		break;
+	case 3:
+		dispararEstilo03(deltaTime);
+		break;
+	default:
+		break;
+	}
+}//disparar
+
+void Enemigo::dispararEstilo01(float deltaTime){
+	float tiempoDisparo = 0.1f;
 	contadorLapsoDisparo += deltaTime;
 	if (contadorLapsoDisparo >= tiempoDisparo) {
 		contadorLapsoDisparo -= tiempoDisparo;
-		
+
 		//disparar 3 veces
 		Juego* juego = Juego::getInstancia();
+		sf::Vector2f d = juego->player->body.getPosition() - body.getPosition();
+		//cout << "dx: " << d.x << ", dy: " << d.y << endl;
+		//sf::Vector2f norm = VectorUtil::normalize(d);
+		//cout << "nx: " << norm.x << ", ny: " << norm.y << endl;
 		sf::Vector2f* dir = new sf::Vector2f(0, 1);
 		juego->crearBala(body.getPosition().x, body.getPosition().y, 0, dir);
 		contadorDisparos++;
@@ -123,4 +149,31 @@ void Enemigo::disparar(float deltaTime){
 		}
 
 	}
+}
+
+void Enemigo::dispararEstilo02(float deltaTime){
+	float tiempoDisparo = 0.2f;
+	contadorLapsoDisparo += deltaTime;
+	if (contadorLapsoDisparo >= tiempoDisparo) {
+		contadorLapsoDisparo -= tiempoDisparo;
+
+		//disparar 3 veces
+		Juego* juego = Juego::getInstancia();
+		sf::Vector2f d = juego->player->body.getPosition() - body.getPosition();
+		//cout << "dx: " << d.x << ", dy: " << d.y << endl;
+		sf::Vector2f norm = VectorUtil::normalize(d);
+		//cout << "nx: " << norm.x << ", ny: " << norm.y << endl;
+		sf::Vector2f* dir = new sf::Vector2f(norm.x, norm.y);
+		
+		juego->crearBala(body.getPosition().x, body.getPosition().y, 2, dir);
+		contadorDisparos++;
+
+		if (contadorDisparos >= 1) {
+			ESTADO_ACTUAL = ESTADO_INICIO_MOVERSE;
+		}
+
+	}
+}
+
+void Enemigo::dispararEstilo03(float deltaTime){
 }
