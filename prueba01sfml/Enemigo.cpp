@@ -141,7 +141,7 @@ void Enemigo::dispararEstilo01(float deltaTime){
 		//sf::Vector2f norm = VectorUtil::normalize(d);
 		//cout << "nx: " << norm.x << ", ny: " << norm.y << endl;
 		sf::Vector2f* dir = new sf::Vector2f(0, 1);
-		juego->crearBala(body.getPosition().x, body.getPosition().y, 0, dir);
+		juego->crearBala(body.getPosition().x, body.getPosition().y, 0, dir, 600);
 		contadorDisparos++;
 
 		if (contadorDisparos >= 3) {
@@ -163,7 +163,7 @@ void Enemigo::dispararEstilo02(float deltaTime){
 		sf::Vector2f norm = VectorUtil::normalize(d);
 		sf::Vector2f* dir = new sf::Vector2f(norm.x, norm.y);
 		
-		juego->crearBala(body.getPosition().x, body.getPosition().y, 2, dir);
+		juego->crearBala(body.getPosition().x, body.getPosition().y, 2, dir, 400);
 		contadorDisparos++;
 
 		if (contadorDisparos >= 1) {
@@ -191,7 +191,7 @@ void Enemigo::dispararEstilo03(float deltaTime){
 		sf::Vector2f norm = VectorUtil::rotar(d, grados);
 		sf::Vector2f* dir = new sf::Vector2f(norm.x, norm.y);
 
-		juego->crearBala(body.getPosition().x, body.getPosition().y, 6, dir);
+		juego->crearBala(body.getPosition().x, body.getPosition().y, 6, dir, 200);
 		contadorDisparos++;
 
 		if (contadorDisparos >= cantidadDisparos) {

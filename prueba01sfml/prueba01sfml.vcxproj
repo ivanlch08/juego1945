@@ -156,6 +156,7 @@
     <ClCompile Include="Bala.cpp" />
     <ClCompile Include="Enemigo.cpp" />
     <ClCompile Include="Entidad.cpp" />
+    <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Juego.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Bala.h" />
     <ClInclude Include="Enemigo.h" />
     <ClInclude Include="Entidad.h" />
+    <ClInclude Include="Explosion.h" />
     <ClInclude Include="Juego.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="VectorUtil.h" />

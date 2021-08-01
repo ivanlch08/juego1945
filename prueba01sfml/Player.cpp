@@ -51,7 +51,7 @@ void Player::Update(float deltaTime){
 		float diferencia = tiempoTotal - tiempoUltimoDisparo;
 		if ( diferencia > lapsoBalas ) {
 			sf::Vector2f* dir = new sf::Vector2f(0,-1.f);
-			Juego::getInstancia()->crearBala( body.getPosition().x, body.getPosition().y, 1, dir);
+			Juego::getInstancia()->crearBala( body.getPosition().x, body.getPosition().y, 1, dir, 400);
 			tiempoUltimoDisparo = tiempoTotal;
 		}
 	}

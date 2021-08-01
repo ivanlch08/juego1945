@@ -63,7 +63,7 @@ void Bala::Update(float deltaTime) {
 				juego->listaEntidadesEnemigos.erase(
 					juego->listaEntidadesEnemigos.begin() + k
 				);
-
+				juego->crearExplosion(body.getPosition().x, body.getPosition().y);
 				break;
 			}
 		}
@@ -80,7 +80,7 @@ void Bala::Update(float deltaTime) {
 	}
 	
 	//si tiempo de vida supera 2 segundos, eliminar entity
-	if ( contadorTiempoVida >= 2.f ) {
+	if ( contadorTiempoVida >= 8.f ) {
 		Juego* juego = Juego::getInstancia();
 		juego->registrarEliminar(this);
 	}

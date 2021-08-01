@@ -3,6 +3,7 @@
 #include "Bala.h"
 #include "Enemigo.h"
 #include "Entidad.h"
+#include "Explosion.h"
 
 using namespace std;
 
@@ -23,12 +24,21 @@ bool Juego::juegoActivo(){
     return esActivo;
 }
 
-void Juego::crearBala(float x, float y, int tipoDisparo, sf::Vector2f* direccion){
+void Juego::crearBala(float x, float y, int tipoDisparo, sf::Vector2f* direccion, float velocidad){
     sf::Texture* text = new sf::Texture();
     text->loadFromFile("texturas/balas.png");
-    Bala* b = new Bala(text, sf::Vector2u(4, 20), 0.05f, 400, x, y, tipoDisparo, direccion);
+    Bala* b = new Bala(text, sf::Vector2u(4, 20), 0.05f, velocidad, x, y, tipoDisparo, direccion);
     listaEntidadesBase.push_back( (Entidad*)b );
 }
+void Juego::crearExplosion(float x, float y){
+    sf::Texture* text = new sf::Texture();
+    text->loadFromFile("texturas/explosion.png");
+    sf::Vector2f* dir = new sf::Vector2f(0,1);
+    //(sf::Texture * texture, sf::Vector2u imageCount, float switchTime, float speed, float x, float y, int tipoDisparo, sf::Vector2f * direccion) :
+    Explosion* ex = new Explosion ( text, sf::Vector2u(5, 1), 0.05f, x, y);
+    listaEntidadesBase.push_back((Entidad*)ex);
+}
+
 void Juego::crearPlayer(){
     sf::Texture* text = new sf::Texture();
     text->loadFromFile("texturas/ship.png");

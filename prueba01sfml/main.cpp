@@ -52,7 +52,6 @@ int main() {
     juego->crearEnemigo(400, 400, 2);
     juego->crearEnemigo(400, 400, 3);
     
-    
     float deltaTime = 0.0f;
     float tiempoTotal = 0.0f;
     sf::Clock clock;

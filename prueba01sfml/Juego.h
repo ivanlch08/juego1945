@@ -25,7 +25,8 @@ public:
 	void iniciar();
 	void update();
 	bool juegoActivo();
-	void crearBala(float x, float y, int tipoDisparo, sf::Vector2f* direccion);
+	void crearBala(float x, float y, int tipoDisparo, sf::Vector2f* direccion, float velocidad);
+	void crearExplosion(float x, float y);
 	void crearPlayer();
 	void crearEnemigo(float x, float y, int tipoEnemigo);
 	void registrarEliminar(Entidad* entidad);
