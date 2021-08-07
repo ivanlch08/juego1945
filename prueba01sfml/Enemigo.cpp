@@ -191,7 +191,7 @@ void Enemigo::dispararEstilo03(float deltaTime){
 		sf::Vector2f norm = VectorUtil::rotar(d, grados);
 		sf::Vector2f* dir = new sf::Vector2f(norm.x, norm.y);
 
-		juego->crearBala(body.getPosition().x, body.getPosition().y, 6, dir, 200);
+		juego->crearBala(body.getPosition().x, body.getPosition().y, 6, dir, 100);
 		contadorDisparos++;
 
 		if (contadorDisparos >= cantidadDisparos) {

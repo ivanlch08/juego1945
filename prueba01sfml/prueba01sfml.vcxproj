@@ -159,6 +159,7 @@
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="Juego.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mensaje.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="VectorUtil.cpp" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="Entidad.h" />
     <ClInclude Include="Explosion.h" />
     <ClInclude Include="Juego.h" />
+    <ClInclude Include="Mensaje.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="VectorUtil.h" />
   </ItemGroup>

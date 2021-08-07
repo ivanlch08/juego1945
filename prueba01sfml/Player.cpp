@@ -6,7 +6,7 @@ Player::Player(sf::Texture* texture, sf::Vector2u imageCount, float switchTime, 
 	Entidad(texture, imageCount, switchTime, speed, x, y) {
 	
 	body.setSize(sf::Vector2f(100.f, 100.f));
-	body.setPosition(sf::Vector2f(200.f, 200.f));
+	body.setPosition(x, y);
 
 	body.setOrigin(sf::Vector2f(50.f, 50.f));
 

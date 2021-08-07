@@ -47,11 +47,18 @@ int main() {
     sf::RenderWindow win(sf::VideoMode(800, 800), "1945");
     juego->window = &win;
 
+    juego->mostrarImagen(4, 30000);//imagen de fondo
+
     juego->crearPlayer();
     //juego->crearEnemigo(400, 400, 1);
     //juego->crearEnemigo(400, 400, 2);
     //juego->crearEnemigo(400, 400, 3);
     
+    juego->mostrarImagen(3, 3);//imagen 1945
+    
+    //juego->mostrarImagen(1, 2);//imagen next level
+    //juego->mostrarImagen(2, 300);//imagen gameover
+
     float deltaTime = 0.0f;
     float tiempoTotal = 0.0f;
     sf::Clock clock;

@@ -30,6 +30,10 @@ private:
 	float contadorTiempoNivel1 = 0;
 	float contadorTiempoNivel2 = 0;
 	float contadorTiempoNivel3 = 0;
+	float lapsoTiempo1 = 1.f;
+	float lapsoTiempo2 = 1.f;
+	float lapsoTiempo3 = 1.f;
+	float contadorReiniciarJuego = 0;
 	int totalEnemigos = 0;
 	int ESTADO_ACTUAL = 0;
 	int nivelActual = 0;
@@ -54,6 +58,8 @@ public:
 
 	void verificarFinNivel(float deltaTime);
 	void notificarEnemigoDestruido();
+
+	void mostrarImagen(int tipoMensaje, float duracion);
 
 	static Juego* getInstancia();
 };
