@@ -16,8 +16,33 @@ void Juego::iniciar(){
     //instancia = juego;
 }//iniciar
 
-void Juego::update(){
-    
+void Juego::update(float deltaTime){
+    //vericiar cambio de niveles
+    switch (ESTADO_ACTUAL){
+    case 0:
+        ESTADO_ACTUAL = ESTADO_INICIAR_NIVEL;
+        break;
+    case ESTADO_INICIAR_NIVEL:
+        iniciarNivel();
+        break;
+    case ESTADO_NIVEL_1:
+        nivel01(deltaTime);
+        break;
+    case ESTADO_NIVEL_2:
+        nivel02(deltaTime);
+        break;
+    case ESTADO_NIVEL_3:
+        nivel03(deltaTime);
+        break;
+    case ESTADO_VERIFICAR_FIN_NIVEL:
+        verificarFinNivel(deltaTime);
+        break;
+    case ESTADO_FIN:
+        break;
+    default:
+        break;
+    }
+
 }//update
 
 bool Juego::juegoActivo(){
@@ -71,8 +96,6 @@ void Juego::registrarEliminar(Entidad* entidad){
     listaEntidadesEliminar.push_back(entidad);
 }
 
-
-
 Juego* Juego::getInstancia(){
     if ( instancia == 0 ) {
         instancia = new Juego();
@@ -80,4 +103,120 @@ Juego* Juego::getInstancia(){
     return instancia;
 }
 
-//crearBala
+void Juego::verificarFinNivel(float deltaTime){
+    if (totalEnemigos <= 0) {
+        //nivel finalizado
+        cout << "Nivel finalizado.." << endl;
+        nivelActual++;
+        ESTADO_ACTUAL = ESTADO_INICIAR_NIVEL;
+    }
+}
+
+void Juego::juegoFinalizado(float deltaTime) {
+    cout << "Juego finalizado!" << endl;
+}
+
+void Juego::notificarEnemigoDestruido(){
+    totalEnemigos--;
+}
+
+void Juego::iniciarNivel() {
+    switch (nivelActual) {
+    case 0:
+        cantidadEnemigosTipo1 = 5;
+        ESTADO_ACTUAL = ESTADO_NIVEL_1;
+        break;
+    case 1:
+        cantidadEnemigosTipo1 = 5;
+        cantidadEnemigosTipo2 = 5;
+        ESTADO_ACTUAL = ESTADO_NIVEL_2;
+        break;
+    case 2:
+        cantidadEnemigosTipo1 = 5;
+        cantidadEnemigosTipo2 = 5;
+        cantidadEnemigosTipo3 = 5;
+        ESTADO_ACTUAL = ESTADO_NIVEL_3;
+        break;
+    case 3:
+        ESTADO_ACTUAL = ESTADO_FIN;
+        break;
+    default:
+        break;
+    }
+}
+
+void Juego::nivel01(float deltaTime) {
+    totalEnemigos = cantidadEnemigosTipo1;
+    float lapsoTiempo = 2.f;
+    contadorTiempoNivel1 += deltaTime;
+
+    if ( contadorTiempoNivel1 > lapsoTiempo ) {
+        contadorTiempoNivel1 -= lapsoTiempo;
+
+        Juego* juego = Juego::getInstancia();
+        juego->crearEnemigo(400, 100, 1);
+        cantidadEnemigosTipo1--;
+        if (cantidadEnemigosTipo1 <= 0) {
+            ESTADO_ACTUAL = ESTADO_VERIFICAR_FIN_NIVEL;
+        }
+    }
+}
+void Juego::nivel02(float deltaTime) {
+    totalEnemigos = cantidadEnemigosTipo1 + cantidadEnemigosTipo2;
+    float lapsoTiempo1 = 3.f;
+    float lapsoTiempo2 = 5.f;
+    contadorTiempoNivel1 += deltaTime;
+    contadorTiempoNivel2 += deltaTime;
+
+    if (contadorTiempoNivel1 > lapsoTiempo1) {
+        contadorTiempoNivel1 -= lapsoTiempo1;
+
+        Juego* juego = Juego::getInstancia();
+        juego->crearEnemigo(400, 100, 1);
+        cantidadEnemigosTipo1--;
+    }
+    if (contadorTiempoNivel2 > lapsoTiempo2) {
+        contadorTiempoNivel2 -= lapsoTiempo2;
+
+        Juego* juego = Juego::getInstancia();
+        juego->crearEnemigo(200, 100, 2);
+        cantidadEnemigosTipo2--;
+    }
+    if (cantidadEnemigosTipo1+cantidadEnemigosTipo2 <= 0) {
+        ESTADO_ACTUAL = ESTADO_VERIFICAR_FIN_NIVEL;
+    }
+}
+void Juego::nivel03(float deltaTime) {
+    totalEnemigos = cantidadEnemigosTipo1 + cantidadEnemigosTipo2 + cantidadEnemigosTipo3;
+    float lapsoTiempo1 = 3.f;
+    float lapsoTiempo2 = 3.f;
+    float lapsoTiempo3 = 3.f;
+    contadorTiempoNivel1 += deltaTime;
+    contadorTiempoNivel2 += deltaTime;
+    contadorTiempoNivel3 += deltaTime;
+
+    if (contadorTiempoNivel1 > lapsoTiempo1) {
+        contadorTiempoNivel1 -= lapsoTiempo1;
+
+        Juego* juego = Juego::getInstancia();
+        juego->crearEnemigo(400, 100, 1);
+        cantidadEnemigosTipo1--;
+    }
+    if (contadorTiempoNivel2 > lapsoTiempo2) {
+        contadorTiempoNivel2 -= lapsoTiempo2;
+
+        Juego* juego = Juego::getInstancia();
+        juego->crearEnemigo(200, 100, 2);
+        cantidadEnemigosTipo2--;
+    }
+    if (contadorTiempoNivel3 > lapsoTiempo3) {
+        contadorTiempoNivel3 -= lapsoTiempo3;
+
+        Juego* juego = Juego::getInstancia();
+        juego->crearEnemigo(200, 100, 3);
+        cantidadEnemigosTipo3--;
+    }
+    if (cantidadEnemigosTipo1 + cantidadEnemigosTipo2 + cantidadEnemigosTipo3 <= 0) {
+        ESTADO_ACTUAL = ESTADO_VERIFICAR_FIN_NIVEL;
+    }
+}

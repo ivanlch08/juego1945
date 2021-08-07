@@ -48,9 +48,9 @@ int main() {
     juego->window = &win;
 
     juego->crearPlayer();
-    juego->crearEnemigo(400, 400, 1);
-    juego->crearEnemigo(400, 400, 2);
-    juego->crearEnemigo(400, 400, 3);
+    //juego->crearEnemigo(400, 400, 1);
+    //juego->crearEnemigo(400, 400, 2);
+    //juego->crearEnemigo(400, 400, 3);
     
     float deltaTime = 0.0f;
     float tiempoTotal = 0.0f;
@@ -85,6 +85,8 @@ int main() {
             e->UpdateAnim(deltaTime);
             e->Draw((*(juego->window)));
         }//
+
+        juego->update(deltaTime);
         
         //iterar entidades a eliminar
         verificarEliminar();
